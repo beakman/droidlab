@@ -6,16 +6,20 @@ class Experiment(models.Model):
 	# we take this data from the oml db name
 	date = models.DateTimeField()
 
+	def __str__(self):
+        return "exp_ " + str(date)
+
 class Result(models.Model):
 	# wich experiment belongs to
 	experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
 
-	# oml database fields
+	# oml database common fields
 	oml_tuple_id = models.IntegerField(null=True, blank=True)
 	oml_sender_id = models.IntegerField(null=True, blank=True)
 	oml_seq = models.IntegerField(null=True, blank=True)
 	oml_ts_client = models.FloatField(null=True, blank=True)
 	oml_ts_server = models.FloatField(null=True, blank=True)
+	timestamp = models.CharField(max_length=100)
 
 	# -- testeldroid_gps
 	latitude = models.FloatField(null=True, blank=True)
@@ -24,7 +28,7 @@ class Result(models.Model):
 	
 	# -- testeldroid_network
 	networkType = models.IntegerField(null=True, blank=True)
-	cellId
+	cellId = models.IntegerField(null=True, blank=True)
 	lacId = models.IntegerField(null=True, blank=True)
 	rssi = models.IntegerField(null=True, blank=True)
 	networkId = models.IntegerField(null=True, blank=True)
