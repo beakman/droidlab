@@ -36,7 +36,8 @@ pytz==2016.7
 django-redis==4.5.0
 redis>=2.10.5
 
-
+# Django REST Framework
+djangorestframework==3.4.7
 
 
 
