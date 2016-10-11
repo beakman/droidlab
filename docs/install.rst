@@ -1,4 +1,11 @@
 Install
 =========
 
-This is where you write how to get a new laptop to run this project.
+sudo apt install postgresql-server-dev-all postgresql postgresql-contrib
+
+psql -U postgres
+
+CREATE ROLE system_user WITH LOGIN ENCRYPTED PASSWORD 'password' CREATEDB;
+
+createdb project_slug
+
