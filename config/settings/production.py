@@ -103,7 +103,7 @@ INSTALLED_APPS += (
 # For Django 1.7+, 'collectfast' should come before
 # 'django.contrib.staticfiles'
 # AWS_PRELOAD_METADATA = True
-INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
+# INSTALLED_APPS = ('collectfast', ) + INSTALLED_APPS
 
 # EMAIL
 # ------------------------------------------------------------------------------
