@@ -47,7 +47,7 @@ LOCAL_APPS = (
     # custom users app
     'droidlab.users.apps.UsersConfig',
     # Your stuff: custom apps go here
-    'experiments',
+    'droidlab.experiments',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
