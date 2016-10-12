@@ -7,7 +7,7 @@ class Experiment(models.Model):
 	date = models.DateTimeField()
 
 	def __str__(self):
-		return "exp_ " + str(date)
+		return "exp_ " + str(self.date)
 
 class Result(models.Model):
 	# wich experiment belongs to
@@ -30,7 +30,7 @@ class Result(models.Model):
 	networkType = models.IntegerField(null=True, blank=True)
 	cellId = models.IntegerField(null=True, blank=True)
 	lacId = models.IntegerField(null=True, blank=True)
-	rssi = models.IntegerField(null=True, blank=True)
+	rssi_network = models.IntegerField(null=True, blank=True)
 	networkId = models.IntegerField(null=True, blank=True)
 	cellPsc = models.IntegerField(null=True, blank=True)
 	rsrp = models.IntegerField(null=True, blank=True)
@@ -40,7 +40,7 @@ class Result(models.Model):
 	
 	# -- testeldroid_neighbours
 	psc = models.IntegerField(null=True, blank=True)
-	rssi = models.IntegerField(null=True, blank=True)
+	rssi_neighbours = models.IntegerField(null=True, blank=True)
 	code = models.IntegerField(null=True, blank=True)
 	
 	# testeldroid_battery
