@@ -12,10 +12,6 @@ from droidlab.experiments.models import Experiment, Result
 
 # genera experimentos aleatorios
 s = string.lowercase+string.digits
-start_date = datetime.today().replace(day=1, month=1).toordinal()
-end_date = datetime.today().toordinal()
-random_day = datetime.fromordinal(random.randint(start_date, end_date))
-
 
 def generaResultados(experimento):
 	res = Result(
@@ -25,7 +21,7 @@ def generaResultados(experimento):
 			oml_seq=random.randint(1,30), 
 			oml_ts_client=random.random(),
 			oml_ts_server=random.random(),
-			timestamp=random_day.strftime('%d.%m.%Y%H.%M.%S.%f')[:-3], # "dd.MM.yyyyHH.mm.ss.SSS"
+			timestamp=datetime.today().strftime('%d.%m.%Y%H.%M.%S.%f')[:-3], # "dd.MM.yyyyHH.mm.ss.SSS"
 			latitude=random.random(),
 			longitude=random.random(),
 			speed=random.random(),
@@ -57,7 +53,7 @@ def generaResultados(experimento):
 			)
 	res.save()
 
-exp = Experiment(date=datetime.today(), name='nc_'+ random_day.strftime('%d.%m.%Y%H.%M.%S.%f')[:-3])
+exp = Experiment(date=datetime.today(), name='nc_'+ datetime.today().strftime('%d.%m.%Y%H.%M.%S.%f')[:-3])
 exp.save()
 
 for x in xrange(1,10):
