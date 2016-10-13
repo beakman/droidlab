@@ -3,6 +3,7 @@ from rest_framework import routers
 from droidlab.experiments.views import ExperimentList, ResultList
 
 router = routers.DefaultRouter()
-router.register(r'experiments', ExperimentList, base_name='experiments')
+router.register(r'experiments', ExperimentList)
+router.register(r'results', ResultList)
 
 urlpatterns = router.urls

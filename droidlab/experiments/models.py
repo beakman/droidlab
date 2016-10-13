@@ -59,3 +59,7 @@ class Result(models.Model):
 	operator = models.CharField(max_length=250)
 	capture_id = models.CharField(max_length=250)
 	comments = models.CharField(max_length=250)
+
+	# video
+	width = models.IntegerField(null=True, blank=True)
+	height = models.IntegerField(null=True, blank=True)

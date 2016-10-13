@@ -5,10 +5,11 @@ class ResultSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Result
 
-class ExperimentSerializer(serializers.ModelSerializer):
-	results = ResultSerializer(many=True, read_only=True)
-
+class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
+	results = serializers.HyperlinkedIdentityField(view_name="results-list")
+	
 	class Meta:
 		model = Experiment
+		fields = ('name', 'date', 'results')
 
 
