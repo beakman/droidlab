@@ -57,7 +57,7 @@ def generaResultados(experimento):
 			)
 	res.save()
 
-exp = Experiment(date=datetime.today(), name='nc_'+ random_day.strftime('%d.%M.%Y%H.%m.%S.%f')[:-3])
+exp = Experiment(date=datetime.today(), name='nc_'+ random_day.strftime('%d.%m.%Y%H.%M.%S.%f')[:-3])
 exp.save()
 
 for x in xrange(1,10):
