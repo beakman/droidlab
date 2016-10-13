@@ -3,15 +3,16 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Experiment(models.Model):
-	# we take this data from the oml db name
+	# "dd.MM.yyyyHH.mm.ss.SSS"
 	date = models.DateTimeField()
+	name = models.CharField(max_length=255, blank=True)
 
 	def __str__(self):
-		return "exp_ " + str(self.date)
+		return self.name
 
 class Result(models.Model):
 	# wich experiment belongs to
-	experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE)
+	experiment = models.ForeignKey(Experiment, on_delete=models.CASCADE, related_name='results')
 
 	# oml database common fields
 	oml_tuple_id = models.IntegerField(null=True, blank=True)

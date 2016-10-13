@@ -25,7 +25,7 @@ def generaResultados(experimento):
 			oml_seq=random.randint(1,30), 
 			oml_ts_client=random.random(),
 			oml_ts_server=random.random(),
-			timestamp=random_day.strftime('%d/%M/%Y%H:%m:%s,%S'),
+			timestamp=random_day.strftime('%d.%M.%Y%H.%m.%S.%f'), # "dd.MM.yyyyHH.mm.ss.SSS"
 			latitude=random.random(),
 			longitude=random.random(),
 			speed=random.random(),
@@ -57,7 +57,7 @@ def generaResultados(experimento):
 			)
 	res.save()
 
-exp = Experiment(date=datetime.today())
+exp = Experiment(date=datetime.today(), name='nc_'+ random_day.strftime('%d.%M.%Y%H.%m.%S.%f'))
 exp.save()
 
 for x in xrange(1,10):
