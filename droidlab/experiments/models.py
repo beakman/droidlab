@@ -3,9 +3,8 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Experiment(models.Model):
-	# "dd.MM.yyyyHH.mm.ss.SSS"
-	date = models.DateTimeField()
-	name = models.CharField(max_length=255, blank=True)
+	name = models.CharField(max_length=255)
+	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.name
@@ -20,7 +19,7 @@ class Result(models.Model):
 	oml_seq = models.IntegerField(null=True, blank=True)
 	oml_ts_client = models.FloatField(null=True, blank=True)
 	oml_ts_server = models.FloatField(null=True, blank=True)
-	timestamp = models.CharField(max_length=100)
+	timestamp = models.CharField(max_length=100, blank=True)
 
 	# -- testeldroid_gps
 	latitude = models.FloatField(null=True, blank=True)
@@ -48,17 +47,17 @@ class Result(models.Model):
 	power_consumption = models.IntegerField(null=True, blank=True)
 
 	# -- testeldroid_profile
-	ip = models.CharField(max_length=250)
-	scenario = models.CharField(max_length=250)
-	tech = models.CharField(max_length=250)
-	config = models.CharField(max_length=250)
-	device = models.CharField(max_length=250)
-	device_conf = models.CharField(max_length=250)
-	imei = models.CharField(max_length=250)
-	os_version = models.CharField(max_length=250)
-	operator = models.CharField(max_length=250)
-	capture_id = models.CharField(max_length=250)
-	comments = models.CharField(max_length=250)
+	ip = models.CharField(max_length=250, blank=True)
+	scenario = models.CharField(max_length=250, blank=True)
+	tech = models.CharField(max_length=250, blank=True)
+	config = models.CharField(max_length=250, blank=True)
+	device = models.CharField(max_length=250, blank=True)
+	device_conf = models.CharField(max_length=250, blank=True)
+	imei = models.CharField(max_length=250, blank=True)
+	os_version = models.CharField(max_length=250, blank=True)
+	operator = models.CharField(max_length=250, blank=True)
+	capture_id = models.CharField(max_length=250, blank=True)
+	comments = models.CharField(max_length=250, blank=True)
 
 	# video
 	width = models.IntegerField(null=True, blank=True)
