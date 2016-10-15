@@ -5,6 +5,7 @@ import string
 from datetime import datetime
 import random
 import psycopg2
+import requests
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
 import django

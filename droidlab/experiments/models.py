@@ -62,3 +62,6 @@ class Result(models.Model):
 	# video
 	width = models.IntegerField(null=True, blank=True)
 	height = models.IntegerField(null=True, blank=True)
+
+	def __str__(self):
+		return 'Result for ' + self.experiment.name

@@ -5,6 +5,7 @@ from .models import Experiment, Result
 class ResultSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Result
+		exclude = ('experiment',)
 
 # class ExperimentSerializer(serializers.HyperlinkedModelSerializer):
 # 	results = serializers.HyperlinkedIdentityField(view_name="results-list")

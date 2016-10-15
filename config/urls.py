@@ -8,6 +8,9 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+from rest_framework.authtoken import views
+
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
@@ -21,6 +24,10 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^api/', include('droidlab.experiments.urls', namespace='experiments')),
+
+    # Url to obtain Auth Token: 
+    # i.e: http POST 127.0.0.1:8000/api-token-auth/ username='admin' password='whatever'
+    url(r'^api-token-auth/', views.obtain_auth_token),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
