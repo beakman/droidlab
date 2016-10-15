@@ -28,6 +28,19 @@ class ExperimentSerializer(serializers.ModelSerializer):
 			Result.objects.create(experiment=ex, **result_data)
 		return ex
 
+	def update(self, instance, validated_data):
+		results_data = validated_data.pop('results')
+		# Unless the application properly enforces that this field is
+		# always set, the follow could raise a `DoesNotExist`, which
+		# would need to be handled.
+		results = instance.results
+
+		instance.save()
+
+		results.save()
+
+		return instance
+
 # class ResultHyperlink(serializers.HyperlinkedRelatedField):
 #     # We define these as class attributes, so we don't need to pass them as arguments.
 #     view_name = 'result-detail'

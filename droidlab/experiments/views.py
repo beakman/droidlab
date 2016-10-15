@@ -34,6 +34,14 @@ class ResultList(generics.ListCreateAPIView):
     queryset = Result.objects.all()
     serializer_class = ResultSerializer
 
+    def get_queryset(self):
+        queryset = super(ResultList, self).get_queryset()
+        return queryset.filter(experiment__name=self.kwargs.get('name'))
+
+    def perform_create(self, serializer):
+    	experiment = Experiment.objects.get(name=self.kwargs.get('name'))
+        serializer.save(experiment=experiment)
+
 class ResultDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Result
     queryset = Result.objects.all()

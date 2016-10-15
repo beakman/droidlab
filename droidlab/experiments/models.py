@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 class Experiment(models.Model):
-	name = models.CharField(max_length=255)
+	name = models.CharField(unique=True, max_length=255)
 	date = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):

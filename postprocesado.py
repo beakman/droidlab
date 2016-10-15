@@ -19,6 +19,7 @@ PORT='5432'
 USER='oml'
 PASSWORD='tester'
 DBNAME = sys.argv[1]
+API_URL = 'http://droidlab.herokuapp.com/api/'
 
 # genera experimentos aleatorios
 s = string.lowercase+string.digits
@@ -70,6 +71,9 @@ def generaResultados(experimento):
 exp = Experiment(date=datetime.today(), name=DBNAME)
 exp.save()
 
+# Primero creamos el experimento:
+data = '{"name": "{}","results": []}'.format(DBNAME)
+
 # Abrimos la base de datos e iteramos por las filas
 conn = psycopg2.connect(database=DBNAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
 cursor = conn.cursor()
@@ -101,3 +105,6 @@ for i in range(len(tmp)):
 			)
 	res.save()
 	# tengo que serializar esto para mandarlo
+
+data = '{"query":{"bool":{"must":[{"text":{"record.document":"SOME_JOURNAL"}},{"text":{"record.articleTitle":"farmers"}}],"must_not":[],"should":[]}},"from":0,"size":50,"sort":[],"facets":{}}'
+response = requests.get(url, data=data)
