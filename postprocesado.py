@@ -6,12 +6,7 @@ from datetime import datetime
 import random
 import psycopg2
 import requests
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings.local')
-import django
-django.setup()
-
-from droidlab.experiments.models import Experiment, Result
+import json
 
 # IMPROVE: No estaria mal asegurar esto
 HOST='localhost'
@@ -19,7 +14,8 @@ PORT='5432'
 USER='oml'
 PASSWORD='tester'
 DBNAME = sys.argv[1]
-API_URL = 'http://droidlab.herokuapp.com/api/'
+API_URL = 'https://droidlab.herokuapp.com/api/'
+AUTH_TOKEN = 'Token 7ebbd9dda9528bf296d1877223e0dcb116fca9b0'
 
 # genera experimentos aleatorios
 s = string.lowercase+string.digits
@@ -27,52 +23,20 @@ start_date = datetime.today().replace(day=1, month=1).toordinal()
 end_date = datetime.today().toordinal()
 random_day = datetime.fromordinal(random.randint(start_date, end_date))
 
-def generaResultados(experimento):
-	res = Result(
-			experiment=experimento,
-			oml_tuple_id=random.randint(1,30), 
-			oml_sender_id=random.randint(1,30), 
-			oml_seq=random.randint(1,30), 
-			oml_ts_client=random.random(),
-			oml_ts_server=random.random(),
-			timestamp=random_day.strftime('%d/%M/%Y%H:%m:%s,%S'),
-			latitude=random.random(),
-			longitude=random.random(),
-			speed=random.random(),
-			networkType=random.randint(1,30),
-			cellId=random.randint(1,30),
-			lacId=random.randint(1,30),
-			rssi_network=random.randint(1,30),
-			networkId=random.randint(1,30),
-			cellPsc=random.randint(1,30),
-			rsrp=random.randint(1,30),
-			snr=random.randint(1,30),
-			cqi=random.randint(1,30),
-			rsrq=random.randint(1,30),
-			psc=random.randint(1,30),
-			rssi_neighbours=random.randint(1,30),
-			code=random.randint(1,30),
-			power_consumption=random.randint(1,30),
-			ip=''.join(random.sample(s,10)),
-			scenario=''.join(random.sample(s,10)),
-			tech=''.join(random.sample(s,10)),
-			config=''.join(random.sample(s,10)),
-			device=''.join(random.sample(s,10)),
-			device_conf=''.join(random.sample(s,10)),
-			imei=''.join(random.sample(s,10)),
-			os_version=''.join(random.sample(s,10)),
-			operator=''.join(random.sample(s,10)),
-			capture_id=''.join(random.sample(s,10)),
-			comments=''.join(random.sample(s,10))
-			)
-	res.save()
-
-# IMPROVE: COMPROBAR SI YA EXISTE DB CON ESE NOMBRE
-exp = Experiment(date=datetime.today(), name=DBNAME)
-exp.save()
-
 # Primero creamos el experimento:
-data = '{"name": "{}","results": []}'.format(DBNAME)
+
+data = {}
+data['name'] = DBNAME
+data['results'] = []
+json_data = json.dumps(data)
+
+print '\n [*] json_data: '
+print json_data
+
+response = requests.post(API_URL, data=json_data, headers={'Authorization': AUTH_TOKEN, 'content-type': 'application/json'})
+
+print '[*] POST to API_URL: ' + API_URL
+print '[*] Response: ' + str(response.status_code)
 
 # Abrimos la base de datos e iteramos por las filas
 conn = psycopg2.connect(database=DBNAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
@@ -90,21 +54,37 @@ for i in range(len(tmp)):
 	oml_ts_client = tmp[i][3]
 	oml_ts_server = tmp[i][4]
 	timestamp = tmp[i][5]
-	width = tmp[i][6]
-	height = tmp[i][7]
-	res = Result(
-			experiment=exp,
-			oml_tuple_id=oml_tuple_id, 
-			oml_sender_id=oml_sender_id, 
-			oml_seq=oml_seq, 
-			oml_ts_client=oml_ts_client,
-			oml_ts_server=oml_ts_server,
-			timestamp=timestamp,
-			width=width,
-			height=height
-			)
-	res.save()
-	# tengo que serializar esto para mandarlo
+	width = int(tmp[i][6])
+	height = int(tmp[i][7])
 
-data = '{"query":{"bool":{"must":[{"text":{"record.document":"SOME_JOURNAL"}},{"text":{"record.articleTitle":"farmers"}}],"must_not":[],"should":[]}},"from":0,"size":50,"sort":[],"facets":{}}'
-response = requests.get(url, data=data)
+	print '\nGet data from database: \n'
+	print '[*]  oml_tuple_id= ' + str(oml_tuple_id)
+	print '[*]  oml_sender_id= ' + str(oml_sender_id)
+	print '[*]  oml_seq= ' + str(oml_seq)
+	print '[*]  oml_ts_client= ' + str(oml_ts_client)
+	print '[*]  oml_ts_server= ' + str(oml_ts_server)
+	print '[*]  timestamp= ' + str(timestamp)
+	print '[*]  width= ' + str(width)
+	print '[*]  height= ' + str(height)
+
+	url = API_URL + DBNAME + '/results'
+	
+	data = {}
+	data['oml_tuple_id'] = oml_tuple_id
+	data['oml_sender_id'] = oml_sender_id
+	data['oml_seq'] = oml_seq
+	data['oml_ts_client'] = oml_ts_client
+	data['oml_ts_server'] = oml_ts_server
+	data['timestamp'] = timestamp
+	data['width'] = width
+	data['height'] = height
+
+	json_data = json.dumps(data)
+	
+	print '\n [*] json_data: '
+	print json_data
+	
+	response = requests.post(url, data=json_data, headers={'Authorization': AUTH_TOKEN, 'content-type': 'application/json'})
+	print '[*] POST to API endpoint: ' + url
+	print '[*] Response: ' + str(response.status_code)
+	# tengo que serializar esto para mandarlo
