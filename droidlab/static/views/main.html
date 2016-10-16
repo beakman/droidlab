@@ -1,4 +1,13 @@
-<h4>Routes</h4>
+<div ng-include="'static/views/header.html'"></div>
+
+<!-- Main Content -->
+<article class="content">
+    <div class="title-block">
+        <h3 class="title">
+            Routes
+        </h3>
+        <p class="title-description"> This is the main screen </p>
+    </div>
     <p>
         <a ng-hide="authenticated" href="#/login" class="btn btn-primary">Login</a>
         <a ng-hide="authenticated" href="#/passwordReset" class="btn btn-primary">Send Password Reset</a>
@@ -12,32 +21,26 @@
         <a ng-show="authenticated" href="#/userProfile" class="btn btn-primary">Profile</a>
         <a href="#/authRequired" class="btn btn-primary">Restricted Page</a>
     </p>
-<hr/>
-<h4>Kitchen Sink Demo</h4>
-<div style="margin-bottom:25px;">
-  <div style="margin-bottom:15px;">
-    <button ng-hide="authenticated" ng-click="login()" class="btn btn-primary">Login</button>
-    <button ng-show="authenticated" ng-click="logout()" class="btn btn-primary">Logout</button>
-    <button ng-hide="authenticated" ng-click="resetPassword()" class="btn btn-primary">Send Password Reset</button>
-    <button ng-hide="authenticated" ng-click="confirmReset()" class="btn btn-primary">Confirm Password Reset</button>
-    <button ng-hide="authenticated" ng-click="register()" class="btn btn-primary">Register</button>
-    <button ng-click="verify()" class="btn btn-primary">Verify Email</button>
-    <button ng-show="authenticated" ng-click="changePassword()" class="btn btn-primary">Change Password</button>
-    <button ng-show="authenticated" ng-click="profile()" class="btn btn-primary">Get Profile</button>
-    <button ng-show="authenticated" ng-click="updateProfile()" class="btn btn-primary">Update Profile</button>
-  </div>
+    <div class="subtitle-block">
+        <h3 class="subtitle">
+            Hello AngularAPP!
+        </h3> 
+    </div>
+    <section class="section">
+        <div class="row sameheight-container">
+            <div class="col-md-12">
+                <div class="card card-block sameheight-item">
+                    <div class="title-block">
+                        <h3 class="title"> This is a container </h3>
+                        <p>{{ response }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+<!-- END Main Content -->
 
-  <p><textarea style="width:90%;height:200px;">{{response}}</textarea></p>
-
-</div>
-
-<hr/>
-<h4>ngInclude Demo - Login</h4>
-<div ng-if="show_login" ng-include="'static/views/login.html'"></div>
-<div ng-if="!show_login" class="alert alert-info">You have logged in.</div>
-
-
-<div class="footer">
-  <p>Tivix</p>
-</div>
+<div ng-include="'static/views/sidebar.html'"></div>
+<div ng-include="'static/views/footer.html'"></div>
 

@@ -1,3 +1,13 @@
-<div id="logout_view" ng-controller="LogoutCtrl">
-	<div class="alert alert-info">You have logged out.</div>
-</div>
+<div ng-include="'static/views/header.html'"></div>
+
+<!-- Main Content -->
+<article class="content">
+	<div id="logout_view" ng-controller="LogoutCtrl">
+		<div class="alert alert-info">You have logged out.</div>
+	</div>
+</article>
+<!-- END Main Content -->
+
+<div ng-include="'static/views/sidebar.html'"></div>
+<div ng-include="'static/views/footer.html'"></div>
+

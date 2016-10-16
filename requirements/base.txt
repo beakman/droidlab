@@ -40,3 +40,4 @@ redis>=2.10.5
 djangorestframework==3.4.7
 
 django-rest-auth==0.8.1
+django-cors-headers==1.2.2
