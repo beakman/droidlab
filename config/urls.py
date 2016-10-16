@@ -24,10 +24,15 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^api/', include('droidlab.experiments.urls', namespace='experiments')),
+    url(r'^api/', include('droidlab.users.urls', namespace='users')),
 
     # Url to obtain Auth Token: 
     # i.e: http POST 127.0.0.1:8000/api-token-auth/ username='admin' password='whatever'
     url(r'^api-token-auth/', views.obtain_auth_token),
+
+    # REST Auth urls
+    url(r'^rest-auth/', include('rest_auth.urls')),
+    url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

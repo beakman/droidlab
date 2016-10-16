@@ -2,9 +2,12 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from droidlab.users.models import User
+
 class Experiment(models.Model):
 	name = models.CharField(unique=True, max_length=255)
 	date = models.DateTimeField(auto_now_add=True)
+	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user', blank=True, null=True)
 
 	def __str__(self):
 		return self.name

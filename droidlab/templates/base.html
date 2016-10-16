@@ -1,110 +1,166 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}DroidLab{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% load staticfiles i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html class="no-js" lang="en">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}DroidLab{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    {% block css %}
-    <!-- Latest compiled and minified Bootstrap 4 Alpha 4 CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+        {% block css %}
+	    <!-- Your stuff: Third-party CSS libraries go here -->
+	    
+	    <!-- This file stores project-specific CSS -->
+	    <link href="{% static 'css/vendor.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+	    
+	    {% endblock %}
 
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    
-    <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    
-    {% endblock %}
+    </head>
 
-  </head>
+    <body ng-app="droidlabApp" ng-controller="MasterCtrl">
 
-  <body>
+		<div class="main-wrapper">
+			<div class="app">
+				<header class="header">
+				    <div class="header-block header-block-collapse hidden-lg-up">
+				        <button class="collapse-btn" id="sidebar-collapse-btn">
+				            <i class="fa fa-bars"></i>
+				        </button>
+				    </div>
+				    <div class="header-block header-block-search hidden-sm-down">
+				        <form role="search">
+				            <div class="input-container"> <i class="fa fa-search"></i>
+				                <input type="search" placeholder="Search">
+				                <div class="underline"></div>
+				            </div>
+				        </form>
+				    </div>
+				    <div class="header-block header-block-buttons">
+				        <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn"> <i class="fa fa-github-alt"></i> <span>View on GitHub</span> </a>
+				        <a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn"> <i class="fa fa-star"></i> <span>Star Us</span> </a>
+				        <a href="https://github.com/modularcode/modular-admin-html/releases/download/v1.0.1/modular-admin-html-1.0.1.zip" class="btn btn-sm header-btn"> <i class="fa fa-cloud-download"></i> <span>Download .zip</span> </a>
+				    </div>
+				</header>
 
-    <div class="m-b-1">
-      <nav class="navbar navbar-dark navbar-static-top bg-inverse">
-        <div class="container">
-          <a class="navbar-brand" href="/">DroidLab</a>
-          <button type="button" class="navbar-toggler hidden-sm-up pull-xs-right" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
-            &#9776;
-          </button>
+				{% block content %}
+				<article class="content" ng-view>
+				    <div class="title-block">
+				        <h3 class="title">
+							Dashboard
+						</h3>
+				        <p class="title-description"> This is the main screen </p>
+				    </div>
+				    <div class="subtitle-block">
+				        <h3 class="subtitle">
+							Hello AngularAPP!
+						</h3> 
+					</div>
+				    <section class="section">
+				        <div class="row sameheight-container">
+				            <div class="col-md-12">
+				                <div class="card card-block sameheight-item">
+				                    <div class="title-block">
+				                        <h3 class="title"> This is a container </h3>
+				                	</div>
+				            	</div>
+				            </div>
+				        </div>
+				    </section>
+				</article>
+				{% endblock content %}
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-toggleable-xs" id="bs-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'home' %}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'experiments:experiment-list' %}">API</a>
-              </li>              
-            </ul>
+		        <aside class="sidebar">
+		            <div class="sidebar-container">
+		                <div class="sidebar-header">
+		                    <div class="brand">
+		                        <div class="logo"> <span class="l l1"></span> <span class="l l2"></span> <span class="l l3"></span> <span class="l l4"></span> <span class="l l5"></span> </div> DroidLab </div>
+		                </div>
+		                <nav class="menu">
+		                    <ul class="nav metismenu" id="sidebar-menu">
+		                        <li class="active">
+		                            <a href="index.html"> <i class="fa fa-home"></i> Dashboard </a>
+		                        </li>
+		                        <li>
+		                            <a href="https://github.com/modularcode/modular-admin-html"> <i class="fa fa-github-alt"></i> Theme Docs </a>
+		                        </li>
+		                    </ul>
+		                </nav>
+		            </div>
+		            <footer class="sidebar-footer">
+		            </footer>
+		        </aside>
+		        <div class="sidebar-overlay" id="sidebar-overlay"></div>		
+				<footer class="footer">
+			        <div class="footer-block author">
+			            <ul>
+			                <li> source at <a href="https://github.com/beakman/droidlab">DroidLab</a> </li>
+			            </ul>
+			        </div>
+			    </footer>
+			</div>
+		</div>
 
-            <ul class="nav navbar-nav pull-xs-right">
-              {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
-                </li>
-              {% else %}
-                <li class="nav-item">
-                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-                </li>
-                <li class="nav-item">
-                  <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
+		{% block modal %}
+	    <div class="modal fade" id="confirm-modal">
+	        <div class="modal-dialog" role="document">
+	            <div class="modal-content">
+	                <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+	                    <h4 class="modal-title"><i class="fa fa-warning"></i> Alert</h4> </div>
+	                <div class="modal-body">
+	                    <p>Are you sure want to do this?</p>
+	                </div>
+	                <div class="modal-footer"> <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button> <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button> </div>
+	            </div>
+	            <!-- /.modal-content -->
+	        </div>
+	        <!-- /.modal-dialog -->
+	    </div>
+	    <!-- /.modal -->
+		{% endblock modal %}
 
-    <div class="container">
+		    <!-- Le javascript
+	    ================================================== -->
+	    <!-- Placed at the end of the document so the pages load faster -->
+	    {% block javascript %}
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+	      <!-- Your stuff: Third-party javascript libraries go here -->
+	      <script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
+	      <script type="text/javascript" src="{% static 'js/angular-route.min.js' %}"></script>
+	      <script type="text/javascript" src="{% static 'js/angular-cookies.min.js' %}"></script>
+	      <script type="text/javascript" src="{% static 'js/angular-resource.min.js' %}"></script>
+	      <script type="text/javascript" src="{% static 'js/angular-sanitize.min.js' %}"></script>
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+	      <!-- place project specific Javascript in this file -->
+	      
+	      <script src="{% static 'js/vendor.js' %}"></script>
+	      <script src="{% static 'js/app.js' %}"></script>
+	      <script src="{% static 'js/droidlabApp.js' %}"></script>
 
-    </div> <!-- /container -->
+	      <script src="{% static 'js/services/djangoAuth.js' %}"></script>
+	      <script src="{% static 'js/services/validate.js' %}"></script>
 
-    {% block modal %}{% endblock modal %}
+	      <script src="{% static 'js/controllers/authrequired.js' %}"></script>
+	      <script src="{% static 'js/controllers/login.js' %}"></script>
+	      <script src="{% static 'js/controllers/logout.js' %}"></script>
+	      <script src="{% static 'js/controllers/main.js' %}"></script>
+	      <script src="{% static 'js/controllers/master.js' %}"></script>
+	      <script src="{% static 'js/controllers/passwordchange.js' %}"></script>
+	      <script src="{% static 'js/controllers/passwordreset.js' %}"></script>
+	      <script src="{% static 'js/controllers/passwordresetconfirm.js' %}"></script>
+	      <script src="{% static 'js/controllers/register.js' %}"></script>
+	      <script src="{% static 'js/controllers/restricted.js' %}"></script>
+	      <script src="{% static 'js/controllers/userprofile.js' %}"></script>
+	      <script src="{% static 'js/controllers/verifyemail.js' %}"></script>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-      <!-- Required by Bootstrap v4 Alpha 4 -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js" integrity="sha384-XTs3FgkjiBgo8qjEjBk0tGmf3wPrWtA6coPfQDfFEY8AnYJwjalXCiosYRBIBZX8" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+	    {% endblock javascript %}
+    </body>
 
-      <!-- Your stuff: Third-party javascript libraries go here -->
-
-      <!-- place project specific Javascript in this file -->
-      
-      <script src="{% static 'js/project.js' %}"></script>
-      
-
-    {% endblock javascript %}
-  </body>
 </html>
- 

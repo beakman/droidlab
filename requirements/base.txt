@@ -39,6 +39,4 @@ redis>=2.10.5
 # Django REST Framework
 djangorestframework==3.4.7
 
-
-
-# Your custom requirements go here
+django-rest-auth==0.8.1

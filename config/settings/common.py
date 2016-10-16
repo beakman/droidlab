@@ -41,7 +41,11 @@ THIRD_PARTY_APPS = (
     'allauth.socialaccount',  # registration
     'rest_framework', # rest api
     'rest_framework.authtoken', # token authentication
+    'rest_auth', # rest authentication
+    'rest_auth.registration', # enable standar registration
 )
+
+SITE_ID = 1 # need for rest authentication
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
@@ -235,7 +239,7 @@ AUTHENTICATION_BACKENDS = (
 # Some really nice defaults
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_ADAPTER = 'droidlab.users.adapters.AccountAdapter'

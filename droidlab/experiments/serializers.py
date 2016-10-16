@@ -19,7 +19,7 @@ class ExperimentSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model = Experiment
-		fields = ('id', 'name', 'date', 'results')
+		fields = ('id', 'name', 'date', 'user', 'results')
 
 	def create(self, validated_data):
 		results_data = validated_data.pop('results')
