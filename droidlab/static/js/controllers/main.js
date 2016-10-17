@@ -80,12 +80,12 @@ angular.module('droidlabApp')
   });
 
 angular.module('droidlabApp')
-  .controller('ExperimentsCtrl', function($scope, $http){
+  .controller('ExperimentsCtrl', function($scope, $http, $window){
     
     $scope.getExperiments = function() {
       $scope.loading = true;
       $scope.experiments = [];
-      var url = 'http://127.0.0.1:8000/api/';
+      var url = '//' + $window.location.host + '/api/';
       $http.get(url)
           .success(function(data) {
             $scope.experiments = data;
@@ -102,12 +102,12 @@ angular.module('droidlabApp')
   });
 
 angular.module('droidlabApp')
-  .controller('ExperimentCtrl', function($scope, $http, $routeParams){
+  .controller('ExperimentCtrl', function($scope, $http, $window, $routeParams){
     $scope.experiment_name = $routeParams.experimentName;
     $scope.getResults = function() {
       $scope.loading = true;
       $scope.results = [];
-      var url = 'http://127.0.0.1:8000/api/'+ $scope.experiment_name + '/results';
+      var url = '//' + $window.location.host + '/api/'+ $scope.experiment_name + '/results';
       $http.get(url)
           .success(function(data) {
             $scope.results = data;
