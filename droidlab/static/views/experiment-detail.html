@@ -7,19 +7,19 @@
             Experiment detail
         </h3>
     </div>
+    
     <section class="section">
         <div class="row sameheight-container">
             <div class="col-md-12">
                 <div class="card card-block sameheight-item">
                     <div class="title-block">
-                        <h3 class="title"> Results for experiment {{ experiment_name }} </h3>
+                        <h3 class="title"> GPS INFO - {{ experiment_name }} </h3>
                     </div>
                     <section id="experiments">
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>OML Tuple ID</th>
                                         <th>OML Sender ID</th>
                                         <th>OML Seq</th>
@@ -28,15 +28,12 @@
                                         <th>Latitude</th>
                                         <th>Longitude</th>
                                         <th>Speed</th>
-                                        <th>Network Type</th>
-                                        <th>Cell ID</th>
                                         <th>Timestamp</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="result in results">
-                                        <th scope="row">{{ result.id }}</th>
-                                        <td>{{ result.oml_tuple_id }}</td>
+                                        <td scope="row">{{ result.oml_tuple_id }}</td>
                                         <td>{{ result.oml_sender_id }}</td>
                                         <td>{{ result.oml_seq }}</td>
                                         <td>{{ result.oml_ts_client }}</td>
@@ -44,10 +41,43 @@
                                         <td>{{ result.latitude }}</td>
                                         <td>{{ result.longitude }}</td>
                                         <td>{{ result.speed }}</td>
+                                        <td>{{ result.timestamp | date:'medium' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="card card-block sameheight-item">
+                    <div class="title-block">
+                        <h3 class="title"> NETWORK INFO - {{ experiment_name }} </h3>
+                    </div>
+                    <section id="experiments">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>OML Tuple ID</th>
+                                        <th>OML Sender ID</th>
+                                        <th>OML Seq</th>
+                                        <th>OML TS Client</th>
+                                        <th>OML TS Server</th>
+                                        <th>Network Type</th>
+                                        <th>Cell ID</th>
+                                        <th>Timestamp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="result in results">
+                                        <td scope="row">{{ result.oml_tuple_id }}</td>
+                                        <td>{{ result.oml_sender_id }}</td>
+                                        <td>{{ result.oml_seq }}</td>
+                                        <td>{{ result.oml_ts_client }}</td>
+                                        <td>{{ result.oml_ts_server }}</td>
                                         <td>{{ result.networkType }}</td>
                                         <td>{{ result.cellId }}</td>
-                                        <td>{{ result.timestamp | date:'medium' }}</td>
-                                        
+                                        <td>{{ result.timestamp | date:'short' }}</td>
                                     </tr>
                                 </tbody>
                             </table>
