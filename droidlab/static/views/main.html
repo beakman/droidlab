@@ -19,6 +19,7 @@
         <a ng-click="goVerify()" class="btn btn-primary">Verify Email</a>
         <a ng-show="authenticated" href="#/passwordChange" class="btn btn-primary">Change Password</a>
         <a ng-show="authenticated" href="#/userProfile" class="btn btn-primary">Profile</a>
+        <a ng-show="authenticated" ng-click="profile()" href="javascript:void(0)" class="btn btn-primary">Get Profile</a>
         <a href="#/authRequired" class="btn btn-primary">Restricted Page</a>
     </p>
     <div class="subtitle-block">

@@ -1,4 +1,15 @@
-<div id="verifyEmail_view" ng-controller="VerifyemailCtrl">
-	<div ng-if="success" class="alert alert-success">You have successfully verified your email address.</div>
-	<div ng-if="failure" class="alert alert-warning">Sorry, there's been an error.</div>
-</div>
+<div ng-include="'static/views/header.html'"></div>
+
+<!-- Main Content -->
+<article class="content">
+	<div id="verifyEmail_view" ng-controller="VerifyemailCtrl">
+		<div ng-if="success" class="alert alert-success">You have successfully verified your email address.</div>
+		<div ng-if="failure" class="alert alert-warning">Sorry, there's been an error.</div>
+	</div>
+</article>
+<!-- END Main Content -->
+
+<div ng-include="'static/views/sidebar.html'"></div>
+<div ng-include="'static/views/footer.html'"></div>
+
+

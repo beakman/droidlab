@@ -66,6 +66,9 @@ angular.module('droidlabApp')
       $scope.response = data;
     }
 
+    $scope.profile();
+    $scope.user = $scope.response;
+
     $scope.show_login = true;
     $scope.$on("djangoAuth.logged_in", function(data){
       $scope.show_login = false;
