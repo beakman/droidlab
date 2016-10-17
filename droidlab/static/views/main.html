@@ -24,17 +24,34 @@
     </p>
     <div class="subtitle-block">
         <h3 class="subtitle">
-            Hello AngularAPP!
+            Hello {{ response.username }}!
         </h3> 
     </div>
-    <section class="section">
+    <section class="section" ng-controller="ExperimentsCtrl">
         <div class="row sameheight-container">
             <div class="col-md-12">
                 <div class="card card-block sameheight-item">
                     <div class="title-block">
-                        <h3 class="title"> This is a container </h3>
-                        <p>{{ response }}</p>
+                        <h3 class="title"> Experiments </h3>
                     </div>
+                    <section id="experiments">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Experiment Name</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="experiment in experiments">
+                                    <th scope="row">{{ $index }}</th>
+                                    <td><a href="#/experiment/{{ experiment.name }}">{{ experiment.name }}</a></td>
+                                    <td>{{ experiment.date | date:'medium' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
                 </div>
             </div>
         </div>

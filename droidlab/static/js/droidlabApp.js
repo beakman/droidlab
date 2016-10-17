@@ -99,6 +99,18 @@ angular.module('droidlabApp', [
           }],
         }
       })
+      .when('/experiment/:experimentName', {
+        templateUrl: 'static/views/experiment-detail.html',
+        controller: 'ExperimentCtrl',
+        resolve: {
+          // I will cause a 1 second delay
+          delay: function($q, $timeout) {
+            var delay = $q.defer();
+            $timeout(delay.resolve, 1000);
+            return delay.promise;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
