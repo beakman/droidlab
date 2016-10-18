@@ -5,10 +5,10 @@ from droidlab.users.views import ListUsers, UserDetail, RetrieveCurrentUser
 
 # Experiments api endpoints
 urlpatterns = [
-    url(r'^(?P<name>[-\w.]+)/results/(?P<pk>\d+)$', ResultDetail.as_view(), name='result-detail'),
-    url(r'^(?P<name>[-\w.]+)/results$', ResultList.as_view(), name='result-list'),
-    url(r'^(?P<name>[-\w.]+)$', ExperimentDetail.as_view(), name='experiment-detail'),
-    url(r'^$', ExperimentList.as_view(), name='experiment-list')
+    url(r'^experiments/(?P<name>[-\w.]+)/results/(?P<pk>\d+)$', ResultDetail.as_view(), name='result-detail'),
+    url(r'^experiments/(?P<name>[-\w.]+)/results$', ResultList.as_view(), name='result-list'),
+    url(r'^experiments/(?P<name>[-\w.]+)$', ExperimentDetail.as_view(), name='experiment-detail'),
+    url(r'^experiments$', ExperimentList.as_view(), name='experiment-list')
 ]
 
 # Users api endpoints

@@ -6,7 +6,7 @@ angular.module('droidlabApp')
     $scope.getExperiments = function() {
       $scope.loading = true;
       $scope.experiments = [];
-      var url = '//' + $window.location.host + '/api/';
+      var url = '//' + $window.location.host + '/api/experiments';
       $http.get(url)
           .success(function(data) {
             $scope.experiments = data;
@@ -28,7 +28,7 @@ angular.module('droidlabApp')
     $scope.getResults = function() {
       $scope.loading = true;
       $scope.results = [];
-      var url = '//' + $window.location.host + '/api/'+ $scope.experiment_name + '/results';
+      var url = '//' + $window.location.host + '/api/experiments/'+ $scope.experiment_name + '/results';
       $http.get(url)
           .success(function(data) {
             $scope.results = data;
