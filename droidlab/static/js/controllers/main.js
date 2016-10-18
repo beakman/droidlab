@@ -68,10 +68,6 @@ angular.module('droidlabApp')
       $scope.response = data;
     }
 
-    $scope.profile();
-    console.log('$cookies');
-    console.log($cookies.getAll());
-    $scope.show_login = true;
     $scope.$on("djangoAuth.logged_in", function(data){
       $scope.show_login = false;
     });
@@ -79,48 +75,4 @@ angular.module('droidlabApp')
       $scope.show_login = true;
     });
 
-  });
-
-angular.module('droidlabApp')
-  .controller('ExperimentsCtrl', function($scope, $http, $window){
-    
-    $scope.getExperiments = function() {
-      $scope.loading = true;
-      $scope.experiments = [];
-      var url = '//' + $window.location.host + '/api/';
-      $http.get(url)
-          .success(function(data) {
-            $scope.experiments = data;
-          })
-          .error(function(data, status) {
-              console.log('Error getting experiments!');
-          }).finally(function() {
-              $scope.loading = false;
-          });
-    }
-
-    $scope.getExperiments();
-
-  });
-
-angular.module('droidlabApp')
-  .controller('ExperimentCtrl', function($scope, $http, $window, $routeParams){
-    $scope.experiment_name = $routeParams.experimentName;
-    $scope.getResults = function() {
-      $scope.loading = true;
-      $scope.results = [];
-      var url = '//' + $window.location.host + '/api/'+ $scope.experiment_name + '/results';
-      $http.get(url)
-          .success(function(data) {
-            $scope.results = data;
-          })
-          .error(function(data, status) {
-              console.log('Error getting results!');
-          }).finally(function() {
-              $scope.loading = false;
-          });
-    }
-
-    $scope.getResults();
-
-  });  
+  }); 

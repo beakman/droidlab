@@ -20,11 +20,6 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>OML Tuple ID</th>
-                                        <th>OML Sender ID</th>
-                                        <th>OML Seq</th>
-                                        <th>OML TS Client</th>
-                                        <th>OML TS Server</th>
                                         <th>Latitude</th>
                                         <th>Longitude</th>
                                         <th>Speed</th>
@@ -32,12 +27,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="result in results">
-                                        <td scope="row">{{ result.oml_tuple_id }}</td>
-                                        <td>{{ result.oml_sender_id }}</td>
-                                        <td>{{ result.oml_seq }}</td>
-                                        <td>{{ result.oml_ts_client }}</td>
-                                        <td>{{ result.oml_ts_server }}</td>
+                                    <tr ng-repeat="result in results">>
                                         <td>{{ result.latitude }}</td>
                                         <td>{{ result.longitude }}</td>
                                         <td>{{ result.speed }}</td>
@@ -58,11 +48,6 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>OML Tuple ID</th>
-                                        <th>OML Sender ID</th>
-                                        <th>OML Seq</th>
-                                        <th>OML TS Client</th>
-                                        <th>OML TS Server</th>
                                         <th>Network Type</th>
                                         <th>Cell ID</th>
                                         <th>Timestamp</th>
@@ -70,11 +55,6 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="result in results">
-                                        <td scope="row">{{ result.oml_tuple_id }}</td>
-                                        <td>{{ result.oml_sender_id }}</td>
-                                        <td>{{ result.oml_seq }}</td>
-                                        <td>{{ result.oml_ts_client }}</td>
-                                        <td>{{ result.oml_ts_server }}</td>
                                         <td>{{ result.networkType }}</td>
                                         <td>{{ result.cellId }}</td>
                                         <td>{{ result.timestamp | date:'short' }}</td>

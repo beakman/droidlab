@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-    url(r'^api/', include('droidlab.experiments.urls', namespace='experiments')),
-    url(r'^api/', include('droidlab.users.urls', namespace='users')),
+    url(r'^api/', include('droidlab.api.urls', namespace='api')),
+
 
     # Url to obtain Auth Token: 
     # i.e: http POST 127.0.0.1:8000/api-token-auth/ username='admin' password='whatever'

@@ -49,8 +49,9 @@ class UserListView(LoginRequiredMixin, ListView):
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+
 # REST Framework Viewsets 
-class UserList(generics.ListAPIView):
+class ListUsers(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -58,3 +59,9 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class RetrieveCurrentUser(generics.ListAPIView):
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(username=self.request.user.username)
