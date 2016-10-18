@@ -23,6 +23,10 @@ class ExperimentList(generics.ListCreateAPIView):
     queryset = Experiment.objects.all()
     serializer_class = ExperimentSerializer
 
+    def get_queryset(self):
+        queryset = super(ExperimentList, self).get_queryset()
+        return queryset.filter(user=self.request.user)
+
 class ExperimentDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Experiment
     queryset = Experiment.objects.all()
