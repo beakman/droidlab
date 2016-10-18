@@ -2,6 +2,8 @@
 
 angular.module('droidlabApp')
   .controller('MainCtrl', function ($scope, $cookies, $location, djangoAuth) {
+
+    if (!djangoAuth.authenticated) {$location.path("/login/");}
     
     $scope.login = function(){
       djangoAuth.login(prompt('Username'),prompt('password'))
@@ -67,8 +69,8 @@ angular.module('droidlabApp')
     }
 
     $scope.profile();
-    $scope.user = $scope.response;
-
+    console.log('$cookies');
+    console.log($cookies.getAll());
     $scope.show_login = true;
     $scope.$on("djangoAuth.logged_in", function(data){
       $scope.show_login = false;
@@ -91,7 +93,7 @@ angular.module('droidlabApp')
             $scope.experiments = data;
           })
           .error(function(data, status) {
-              alert('Error getting experiments!');
+              console.log('Error getting experiments!');
           }).finally(function() {
               $scope.loading = false;
           });
@@ -113,7 +115,7 @@ angular.module('droidlabApp')
             $scope.results = data;
           })
           .error(function(data, status) {
-              alert('Error getting results!');
+              console.log('Error getting results!');
           }).finally(function() {
               $scope.loading = false;
           });
