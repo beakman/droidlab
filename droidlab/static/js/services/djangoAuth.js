@@ -103,7 +103,9 @@ angular.module('droidlabApp')
                 'url': "/logout/"
             }).then(function(data){
                 delete $http.defaults.headers.common.Authorization;
-                delete $cookies.get("token");
+                console.log('deleted cookies?', $cookies);
+                $cookies.remove("token");
+                console.log('deleted cookies?', $cookies);
                 djangoAuth.authenticated = false;
                 $rootScope.$broadcast("djangoAuth.logged_out");
             });

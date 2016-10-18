@@ -28,12 +28,10 @@
             <div class="alert alert-danger" ng-repeat="error in errors.password">{{error}}</div>
             <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
             <div class="alert alert-danger" ng-if="error">{{error}}</div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-block btn-primary">Login</button>
           </form>
+          <p class="text-xs-center">Don't have an account? <a href="#/register">Register</a></p>
         </div>
-    </div>
-    <div class="text-xs-center">
-        <a href="#/" class="btn btn-secondary rounded btn-sm"> <i class="fa fa-arrow-left"></i> Back to dashboard </a>
     </div>
   </div>
 </div>

@@ -17,6 +17,15 @@ angular.module('droidlabApp', [
           }],
         }
       })
+      .when('/home', {
+        templateUrl: 'static/views/home.html',
+        controller: 'HomeCtrl',
+        resolve: {
+          authenticated: ['djangoAuth', function(djangoAuth){
+            return djangoAuth.authenticationStatus();
+          }],
+        }
+      })
       .when('/register', {
         templateUrl: 'static/views/register.html',
         resolve: {

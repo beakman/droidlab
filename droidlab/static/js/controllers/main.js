@@ -1,9 +1,16 @@
 'use strict';
 
 angular.module('droidlabApp')
-  .controller('MainCtrl', function ($scope, $cookies, $location, djangoAuth) {
-
-    if (!djangoAuth.authenticated) {$location.path("/login/");}
+  .controller('MainCtrl', function ($scope, $cookies, $location, djangoAuth, API) {
+    
+    API.fetchUser().then(function(data){
+            console.log("home ctrl fetch", data);
+            if (data.length>0){
+                $location.path('/home');
+            }else{
+                $location.path('/login');
+            }
+        });
     
     $scope.login = function(){
       djangoAuth.login(prompt('Username'),prompt('password'))
